@@ -4,7 +4,12 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const port = 3000;
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 // Configure storage to use original filenames
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -18,7 +23,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 10 * 1024 * 1024 // 10MB limit
+        fileSize:  1024 * 1024 *1024 // 1GB limit
     }
 });
 
@@ -55,7 +60,9 @@ app.get('/files', (req, res) => {
         res.json(fileList);
     });
 });
-
+app.get('/test', (req, res) => {
+    res.send('Server is accessible');
+});
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

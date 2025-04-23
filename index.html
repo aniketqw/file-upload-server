@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload and Storage</title>
     <style>
@@ -72,7 +74,7 @@
         <div class="upload-section">
             <h2>Upload File</h2>
             <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" required>
+                <input type="file" name="file" required accept="*/*" capture  >
                 <br>
                 <button type="submit" class="upload-button">Upload</button>
             </form>
